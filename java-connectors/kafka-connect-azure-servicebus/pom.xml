@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Parent configuration if applicable -->
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>stream-reactor-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>kafka-connect-azure-servicebus</artifactId>
+    <packaging>jar</packaging>
+    <name>kafka-connect-azure-servicebus</name>
+    
+    <dependencies>
+        <!-- Dependency on module: kafka-connect-common -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>kafka-connect-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- Dependency on module: kafka-connect-query-language -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>kafka-connect-query-language</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- Test dependency on module: test-utils with classifier "testArtifacts" -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>test-utils</artifactId>
+            <version>${project.version}</version>
+            <classifier>testArtifacts</classifier>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Azure Service Bus dependencies -->
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-core</artifactId>
+            <version>1.54.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-messaging-servicebus</artifactId>
+            <version>7.17.8</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Configure the Surefire plugin to mimic maxParallelForks = 1 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <forkCount>1</forkCount>
+                    <reuseForks>false</reuseForks>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
